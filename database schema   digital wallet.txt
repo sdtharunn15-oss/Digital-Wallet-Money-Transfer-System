@@ -1,0 +1,41 @@
+## Database Schema
+
+```mermaid
+erDiagram
+
+USERS {
+ int id PK
+ string name
+ string email
+ string phone
+ string password
+ string role
+}
+
+WALLETS {
+ int id PK
+ int user_id FK
+ float balance
+}
+
+TRANSACTIONS {
+ int id PK
+ int wallet_id FK
+ string type
+ float amount
+ string status
+}
+
+TRANSFERS {
+ int id PK
+ int sender_wallet_id FK
+ int receiver_wallet_id FK
+ float amount
+ string reference
+ string status
+}
+
+USERS ||--|| WALLETS : owns
+WALLETS ||--o{ TRANSACTIONS : has
+WALLETS ||--o{ TRANSFERS : sends
+WALLETS ||--o{ TRANSFERS : receives
